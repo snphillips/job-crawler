@@ -7,30 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import time
-
-# List of websites to crawl
-websites = [
-    'https://adhoc.rec.pro.ukg.net/ADH1000ADHOC/JobBoard/1893bc9c-1fe2-4c48-90e8-0de36fe3f2b2/?q=&o=postedDateDesc',
-    'https://nationbuilder.com/careers#apply',
-    'https://jobs.ashbyhq.com/kaizenlabs',
-    'https://www.fastly.com/about/careers/current-openings/',
-    'https://watershed.com/careers',
-    'https://jobs.jobvite.com/tylertech/jobs',
-    'https://skylight.digital/careers/join/#open-positions',
-    'https://cleargov.applytojob.com/apply/',
-    'https://www.gethearth.com/careers/',
-    'https://civicactions.com/careers/#open-positions',
-    'https://rematter.com/careers/#ashby_embed',
-    'https://join.tts.gsa.gov/',
-    'https://boards.greenhouse.io/accela',
-    'https://readme.com/careers',
-    'https://oddball.io/jobs/',
-    'https://bowery.co/join-us/?location=new-york&department=technology',
-    # Add more websites as needed
-
-    # TODO: Crawler doesn't work on the sites below. Figure out why
-    'https://up.codes/careers',
-]
+from careerPages import careerPages  # Import the list of careerPages
 
 # Keywords to search for
 keywords = [
@@ -55,7 +32,7 @@ def close_dialogs(driver):
     except Exception as e:
         pass  # No dialog to close or unable to find the close button
 
-def crawl_website(url, driver):
+def crawl_careerPage(url, driver):
     driver.get(url)
     time.sleep(5)  # Wait for initial load
 
@@ -64,8 +41,8 @@ def crawl_website(url, driver):
     try:
         # Wait for page to fully load
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    except Exception as e:
-        print(f"Error loading {url}: {e}")
+    except Exception as error:
+        print(f"Error loading {url}: {error}")
         return False
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
@@ -95,11 +72,11 @@ if __name__ == '__main__':
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     keywords_found_count = 0
-    for website in websites:
-        if crawl_website(website, driver):
+    for careerPage in careerPages:
+        if crawl_careerPage(careerPage, driver):
             keywords_found_count += 1
         time.sleep(2)  # Add a delay between requests
 
     driver.quit()
-    print(f"Keywords were found in job listings at {keywords_found_count} out of {len(websites)} websites.")
+    print(f"Keywords were found in job listings at {keywords_found_count} out of {len(careerPages)} career pages.")
     print(f"💤 Web crawler has finished.")
