@@ -7,9 +7,9 @@ from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import time
-from careerPages import careerPages  # Import the list of careerPages
+from careerPages import careerPages
 
-# Keywords to search for
+# Add your own list of keywords to search for
 keywords = [
     'web developer',
     'software engineer',
@@ -25,12 +25,13 @@ keywords = [
 
 def close_dialogs(driver):
     try:
-        # Example: Close a dialog by clicking on a close button
+        # If there's a dialog box with a close button with the class .close-button
         close_button = driver.find_element(By.CSS_SELECTOR, '.close-button')
         if close_button:
             close_button.click()
     except Exception as e:
-        pass  # No dialog to close or unable to find the close button
+        # No dialog to close or unable to find the close button
+        pass
 
 def crawl_careerPage(url, driver):
     driver.get(url)
@@ -46,7 +47,8 @@ def crawl_careerPage(url, driver):
         return False
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    page_text = soup.get_text().lower()  # Convert page text to lowercase
+    # Convert page text to lowercase to make search case agnostic
+    page_text = soup.get_text().lower()
     found_keywords = set()
     for keyword in keywords:
         if keyword.lower() in page_text:
@@ -63,7 +65,7 @@ if __name__ == '__main__':
 
     # Setup Chrome options
     chrome_options = Options()
-    chrome_options.add_argument('--headless')  # Run headless Chrome
+    chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
 
@@ -75,8 +77,10 @@ if __name__ == '__main__':
     for careerPage in careerPages:
         if crawl_careerPage(careerPage, driver):
             keywords_found_count += 1
-        time.sleep(2)  # Add a delay between requests
+        # Add a delay between requests
+        time.sleep(2)  
 
     driver.quit()
     print(f"Keywords were found in job listings at {keywords_found_count} out of {len(careerPages)} career pages.")
     print(f"💤 Web crawler has finished.")
+
