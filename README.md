@@ -1,6 +1,6 @@
 # python-job-crawler
 
-Looking for work stinks. Scouring websites for jobs is time-consuming and repetitive. This Python-based web crawler is designed to visit a list of online career pages that I've specified and search for specific keywords, in my case, for front-end related jobs.
+Looking for work stinks. Scouring websites for job postings is time-consuming and repetitive. This Python-based web crawler is designed to visit a list of online career pages that I've specified and search for specific keywords, in my case, for front-end related jobs.
 
 This web crawler was developed with ChatGPT, with prompts and guidance provided by me.
 
@@ -25,16 +25,23 @@ pip3 install selenium webdriver_manager beautifulsoup4
 ```
 
 ### Create careerPages.py
-Create a file named `careerPages.py` in the same directory as your script. This file should contain the list of websites you want to crawl. Add this file to your .gitignore to prevent it from being included in version control.
+The list of careerPages to visit is stored in `careerPages.py` so that it can be added to `.gitignore` file.
+Create a file named `careerPages.py` in the same directory as your script. 
 
-Sample careerPages.py
+```
+touch careerPages.py
+```
+
+This file should contain the list of websites you want to crawl. If you'd like to keep your list of career pages to yourself, confirm that this file to your `.gitignore` to prevent it from being included in version control
+
+Sample careerPages.py:
 
 ```
 careerPages = [
     'https://great-company.com/careers',
     'https://we-value-work-life-balance.com/jobs',
     'https://not-making-the-world-a-worse-place.com/joinus',
-    'https:/bird-watching-and-brunch.com/openings'
+    'https:/bird-watching-and-forest-bathing.com/openings'
     # Add more websites as needed
 ]
 ```
@@ -44,7 +51,7 @@ careerPages = [
 Using the terminal, run the script:
 
 ```
-python3 job-crawler.py
+python3 python-job-crawler.py
 ```
 The script will start and print messages indicating the progress, including which websites were crawled and whether any keywords were found.
 
