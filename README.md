@@ -1,6 +1,6 @@
 # python-job-crawler
 
-Looking for work stinks. Scouring websites for job postings is time-consuming and repetitive. This Python-based web crawler is designed to visit a list of online career pages that I've specified and search for specific keywords, in my case, for front-end related jobs.
+Looking for work stinks. Scouring websites for job postings is time-consuming and repetitive. This Python-based web crawler is designed to visit a list of specified online career pages that and search for specific keywords, in my case, for front-end related jobs.
 
 This web crawler was developed with ChatGPT, with prompts and guidance provided by me.
 
@@ -32,9 +32,9 @@ Create a file named `careerPages.py` in the same directory as your script.
 touch careerPages.py
 ```
 
-This file should contain the list of websites you want to crawl. If you'd like to keep your list of career pages to yourself, confirm that this file to your `.gitignore` to prevent it from being included in version control
+This file should contain the list of websites you want to crawl. If you'd like to keep your list of career pages to yourself, confirm that the file has been added to your `.gitignore` to prevent it from being included in version control.
 
-Sample careerPages.py:
+Sample careerPages.py. Replace the placeholder urls with your own list.
 
 ```
 careerPages = [

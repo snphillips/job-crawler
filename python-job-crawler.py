@@ -23,8 +23,8 @@ keywords = [
 
 def close_dialogs(driver):
     try:
-        # If there's a dialog box with a close button with the class .close-button
-        close_button = driver.find_element(By.CSS_SELECTOR, '.close-button')
+        # If there's a dialog box with a close button with class .close-button or .close
+        close_button = driver.find_element(By.CSS_SELECTOR, '.close-button' | '.close')
         if close_button:
             close_button.click()
     except Exception as e:
@@ -35,7 +35,8 @@ def crawl_careerPage(url, driver):
     driver.get(url)
     time.sleep(5)  # Wait for initial load
 
-    close_dialogs(driver)  # Handle any potential dialogs
+    # Handle any potential dialogs
+    close_dialogs(driver)
 
     try:
         # Wait for page to fully load
@@ -45,7 +46,7 @@ def crawl_careerPage(url, driver):
         return False
 
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    # Convert page text to lowercase to make search case agnostic
+    # Convert page text to lowercase to make search case-agnostic
     page_text = soup.get_text().lower()
     found_keywords = set()
     for keyword in keywords:
@@ -76,7 +77,7 @@ if __name__ == '__main__':
         if crawl_careerPage(careerPage, driver):
             keywords_found_count += 1
         # Add a delay between requests
-        # time.sleep(1)  
+        time.sleep(1)  
 
     driver.quit()
     print(f"Keywords were found in job listings at {keywords_found_count} out of {len(careerPages)} career pages.")
