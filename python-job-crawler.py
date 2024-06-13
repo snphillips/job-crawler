@@ -12,8 +12,6 @@ from careerPages import careerPages
 # Add your own list of keywords to search for
 keywords = [
     'web developer',
-    'software engineer',
-    'software developer',
     'front-end',
     'frontend',
     'front end',
@@ -78,7 +76,7 @@ if __name__ == '__main__':
         if crawl_careerPage(careerPage, driver):
             keywords_found_count += 1
         # Add a delay between requests
-        time.sleep(2)  
+        # time.sleep(1)  
 
     driver.quit()
     print(f"Keywords were found in job listings at {keywords_found_count} out of {len(careerPages)} career pages.")
