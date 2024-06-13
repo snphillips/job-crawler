@@ -25,16 +25,16 @@ pip3 install selenium webdriver_manager beautifulsoup4
 ```
 
 ### Create careerPages.py
-The list of careerPages to visit is stored in `careerPages.py` so that it can be added to `.gitignore` file.
+The list of career pages to visit is stored in `careerPages.py`.
 Create a file named `careerPages.py` in the same directory as your script. 
 
 ```
 touch careerPages.py
 ```
 
-This file should contain the list of websites you want to crawl. If you'd like to keep your list of career pages to yourself, confirm that the file has been added to your `.gitignore` to prevent it from being included in version control.
+This file contain the list of websites you want to crawl. 
 
-Sample careerPages.py. Replace the placeholder urls with your own list.
+Below is a sample `careerPages.py`. Replace the placeholder urls with your own list.
 
 ```
 careerPages = [
@@ -45,6 +45,8 @@ careerPages = [
     # Add more websites as needed
 ]
 ```
+
+If you'd like to keep your list of career pages to yourself, confirm that the file has been added to your `.gitignore` to prevent it from being included in version control.
 
 ## Running the Script
 
