@@ -1,4 +1,4 @@
-# python-job-crawler
+# Python Job Web Crawler
 
 Looking for work stinks. Scouring websites for job postings is time-consuming and repetitive. This Python-based web crawler is designed to visit a list of specified online career pages that and search for specific keywords, in my case, for front-end related jobs.
 
