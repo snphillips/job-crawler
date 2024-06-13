@@ -1,15 +1,22 @@
 # python-job-crawler
 
-This project is a Python-based web crawler designed to visit a list of online career pages and search for specific keywords. The script leverages Selenium and BeautifulSoup to scrape job listings from various websites and identify positions that match your keywords.
+This is a Python-based web crawler designed to visit a list of online career pages and search for specific keywords. The script leverages Selenium and BeautifulSoup to scrape job listings from various websites and identify positions that match your keywords.
 
-## About
 This web crawler was developed with the assistance of ChatGPT, with prompts and guidance provided by me.
 
 ## Prerequisites
-- Python 3.11.1
+- Python3
 - Google Chrome
 - ChromeDriver
 
+## Getting Started
+
+Clone the repo and navigate into the directory.
+
+```
+git clone https://github.com/yourusername/job-keyword-web-crawler.git
+cd job-keyword-web-crawler
+```
 ## Installation
 
 Install Python 3
