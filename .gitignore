@@ -163,3 +163,4 @@ cython_debug/
 
 # Sarah's additions
 careerPages.py
+chromeDriverPath.py

@@ -52,7 +52,26 @@ If you'd like to keep your list of career pages to yourself, confirm that the fi
 
 ## Running the Script
 
-Using the terminal, run the script:
+Ensure your 'chromedriver' is running.
+To run chromedriver directly from the command line, follow these steps:
+
+Locate chromedriver:
+webdriver-manager downloads chromedriver to a specific directory. By default, it's usually stored in your home directory under .wdm.
+
+Navigate to the directory:
+Open your terminal and navigate to the directory containing the chromedriver executable (the file path below is an example only).
+
+Ensure the chromedriver file has executable permissions. You can set the correct permissions using the chmod command.
+```
+chmod +x chromedriver
+```
+
+Execute the chromedriver executable directly from the terminal.
+```
+./chromedriver
+```
+
+Now that the chromedriver is running, using the terminal, run the script:
 
 ```
 python3 python-job-crawler.py

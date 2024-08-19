@@ -8,6 +8,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from bs4 import BeautifulSoup
 import time
 from careerPages import careerPages
+from chromeDriverPath import chromeDriverPath
 
 # Add your own list of keywords to search for
 keywords = [
@@ -68,8 +69,13 @@ if __name__ == '__main__':
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
 
-    # Initialize WebDriver
-    service = Service(ChromeDriverManager().install())
+    # Initialize WebDriver with the exact path to chromedriver
+    # Add your specific path to a filed called chromeDriverPath.py.
+    # The contents of schromeDriverPath.py hould look similar to this:
+    # chromeDriverPath = '/Users/sueellenmisky/.wdm/drivers/chromedriver/mac64/127.0.6533.119/chromedriver-mac-x64/chromedriver'
+    # Ensure chromeDriverPath.py is in your .gitignore
+    chromedriver_path = chromeDriverPath
+    service = Service(chromedriver_path)
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     keywords_found_count = 0
@@ -82,4 +88,3 @@ if __name__ == '__main__':
     driver.quit()
     print(f"Keywords were found in job listings at {keywords_found_count} out of {len(careerPages)} career pages.")
     print(f"💤 Web crawler has finished.")
-
