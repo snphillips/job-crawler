@@ -25,6 +25,7 @@ keywords = [
 def close_dialogs(driver):
     try:
         # If there's a dialog box with a close button with class .close-button or .close
+        # Add more class names as you encounter them
         close_button = driver.find_element(By.CSS_SELECTOR, '.close-button' | '.close')
         if close_button:
             close_button.click()
