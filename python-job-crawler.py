@@ -71,11 +71,10 @@ if __name__ == '__main__':
 
     # Initialize WebDriver with the exact path to chromedriver
     # Add your specific path to a filed called chromeDriverPath.py.
-    # The contents of schromeDriverPath.py hould look similar to this:
+    # The contents of chromeDriverPath.py should look similar to this:
     # chromeDriverPath = '/Users/sueellenmisky/.wdm/drivers/chromedriver/mac64/127.0.6533.119/chromedriver-mac-x64/chromedriver'
     # Ensure chromeDriverPath.py is in your .gitignore
-    chromedriver_path = chromeDriverPath
-    service = Service(chromedriver_path)
+    service = Service(chromeDriverPath)
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     keywords_found_count = 0
