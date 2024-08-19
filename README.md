@@ -93,3 +93,12 @@ python3 python-job-crawler.py
 ```
 The script will start and print messages indicating the progress, including which websites were crawled and whether any keywords were found.
 
+If you need to interrupt your script, press control + c:
+```
+^c
+```
+
+Remember to stop your chromedriver once you're done:
+```
+^c
+```
