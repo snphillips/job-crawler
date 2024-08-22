@@ -9,59 +9,13 @@ from bs4 import BeautifulSoup
 import time
 from careerPages import careerPages
 from chromeDriverPath import chromeDriverPath
+FILENAME = "keywords.txt" #instead of storing in a list , just store the keywords in a txt file
 
-# Add your own list of keywords to search for
-keywords = [
-    'web developer',
-    'front-end',
-    'frontend',
-    'front end',
-    'react',
-    'reactjs',
-    'UI Developer',
-    'UI Engineer'
-]
-
-def close_dialogs(driver):
-    try:
-        # If there's a dialog box with a close button with class .close-button or .close
-        # Add more class names as you encounter them
-        close_button = driver.find_element(By.CSS_SELECTOR, '.close-button' | '.close')
-        if close_button:
-            close_button.click()
-    except Exception as e:
-        # No dialog to close or unable to find the close button
-        pass
-
-def crawl_careerPage(url, driver):
-    driver.get(url)
-    time.sleep(5)  # Wait for initial load
-
-    # Handle any potential dialogs
-    close_dialogs(driver)
-
-    try:
-        # Wait for page to fully load
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    except Exception as error:
-        print(f"Error loading {url}: {error}")
-        return False
-
-    soup = BeautifulSoup(driver.page_source, 'html.parser')
-    # Convert page text to lowercase to make search case-agnostic
-    page_text = soup.get_text().lower()
-    found_keywords = set()
-    for keyword in keywords:
-        if keyword.lower() in page_text:
-            found_keywords.add(keyword)
-    if found_keywords:
-        print(f'💃 Found keywords "{", ".join(found_keywords)}" in job listings at {url}')
-        return True
-    else:
-        print(f'No keywords found in job listings at {url}')
-        return False
-
-if __name__ == '__main__':
+keywords =[]
+with open(FILENAME) as f:
+    for keyword in f.readlines():
+        keywords.append(element)
+def main():
     print("🏁 Starting the web crawler...")
 
     # Setup Chrome options
@@ -88,3 +42,45 @@ if __name__ == '__main__':
     driver.quit()
     print(f"Keywords were found in job listings at {keywords_found_count} out of {len(careerPages)} career pages.")
     print(f"💤 Web crawler has finished.")
+
+def close_dialogs(driver):
+    try:
+        # If there's a dialog box with a close button with class .close-button or .close
+        # Add more class names as you encounter them
+        close_button = driver.find_element(By.CSS_SELECTOR, '.close-button' | '.close')
+        if close_button:
+            close_button.click()
+    except Exception as e:
+        # No dialog to close or unable to find the close button
+        pass
+
+def crawl_careerPage(url, driver):
+    driver.get(url)
+    time.sleep(5)  # Wait for initial load
+
+    # Handle any potential dialogs
+    close_dialogs(driver)
+
+    try:
+        # Wait for page to fully load
+        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
+    except Exception as error:    #also how this works but maybe you could try to find all the specific errors and provide some help regarding how to solve them
+        print(f"Error loading {url}: {error}")
+        return False
+
+    soup = BeautifulSoup(driver.page_source, 'html.parser')
+    # Convert page text to lowercase to make search case-agnostic
+    page_text = soup.get_text().lower()
+    found_keywords = set()
+    for keyword in keywords:
+        if keyword.lower() in page_text:
+            found_keywords.add(keyword)
+    if found_keywords:
+        print(f'💃 Found keywords "{", ".join(found_keywords)}" in job listings at {url}')
+        return True
+    else:
+        print(f'No keywords found in job listings at {url}')
+        return False
+
+if __name__ == '__main__':
+    main()
