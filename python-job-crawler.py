@@ -9,7 +9,9 @@ from bs4 import BeautifulSoup
 import time
 from careerPages import careerPages
 from chromeDriverPath import chromeDriverPath
-FILENAME = "keywords.txt" #Store your keywords in a txt file where every word is on a new line
+
+# Store your keywords in a txt file where every word is on a new line
+FILENAME = "keywords.txt" 
 
 keywords =[]
 with open(FILENAME) as f:
