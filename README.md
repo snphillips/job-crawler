@@ -5,6 +5,7 @@ Looking for work stinks. Scouring websites for job postings is time-consuming an
 This web crawler was developed with ChatGPT, with prompts and guidance provided by me.
 
 note: This script is not perfect. Confirm that it works on your list of urls by first using keywords that _do_ appear on the sites you are searching.
+note: The below instructions are for macs.
 
 ## Getting Started
 
