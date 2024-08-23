@@ -1,10 +1,10 @@
 # Python Job Web Crawler
 
-Looking for work stinks. Scouring websites for job postings is time-consuming and repetitive. This Python-based web crawler is designed to visit a list of specified online career pages that and search for specific keywords, in my case, for front-end related jobs.
+Looking for work stinks. Scouring websites for job postings is time-consuming and repetitive. This Python-based web crawler is designed to visit a list of specified online career pages that and search for specific keywords, in my case, for front-end related jobs. This script doesn't have to be used for job searching. You could search any pages you'd like for any keywords you like.
 
 This web crawler was developed with ChatGPT, with prompts and guidance provided by me.
 
-note: This script is not perfect. Confirm that it works on your list of urls by first using keywords that do appear on the sites you're searching.
+note: This script is not perfect. Confirm that it works on your list of urls by first using keywords that _do_ appear on the sites you are searching.
 
 ## Getting Started
 
