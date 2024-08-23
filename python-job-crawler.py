@@ -9,12 +9,12 @@ from bs4 import BeautifulSoup
 import time
 from careerPages import careerPages
 from chromeDriverPath import chromeDriverPath
-FILENAME = "keywords.txt" #instead of storing in a list , just store the keywords in a txt file
+FILENAME = "keywords.txt" #Store your keywords in a txt file where every word is on a new line
 
 keywords =[]
 with open(FILENAME) as f:
     for keyword in f.readlines():
-        keywords.append(element)
+        keywords.append(keyword.strip())
 def main():
     print("🏁 Starting the web crawler...")
 
@@ -64,7 +64,7 @@ def crawl_careerPage(url, driver):
     try:
         # Wait for page to fully load
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    except Exception as error:    #also how this works but maybe you could try to find all the specific errors and provide some help regarding how to solve them
+    except Exception as error:
         print(f"Error loading {url}: {error}")
         return False
 
