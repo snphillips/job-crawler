@@ -1,88 +1,143 @@
+import time
+import logging
+from pathlib import Path
+from typing import List
+
+from bs4 import BeautifulSoup
 from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
-from bs4 import BeautifulSoup
-import time
+
 from careerPages import careerPages
 from chromeDriverPath import chromeDriverPath
 
-# Store your keywords in a txt file where every word is on a new line
-FILENAME = "keywords.txt" 
 
-keywords =[]
-with open(FILENAME) as f:
-    for keyword in f.readlines():
-        keywords.append(keyword.strip())
-def main():
-    print("🏁 Starting the web crawler...")
+logging.basicConfig(  # logger initialization
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+SRC_KW_FILENAME = "keywords.txt"  # file containing keywords to look for
+PAGE_LOADING_TIME_SLEEPER = 5  # time in s waiting for the web page to load
+
+def main() -> None:
+    """
+    Main function to initialize the web crawler, configure the Chrome driver,
+    and crawl career pages.
+
+    Raises:
+        FileNotFoundError: If file `SRC_KW_FILENAME` is not found.
+        IOError: If there is an issue opening or reading the file.
+        Exception: Any other exceptions that may occur during file processing.
+    """
+
+    file_path = Path(SRC_KW_FILENAME)
+    keywords = []
+
+    # If the kw file exists, insert its kws inside our keywords list
+    if file_path.exists():
+        try:
+            with file_path.open('r', encoding='utf-8') as f:
+                keywords = [keyword.strip().lower() for keyword in f if keyword.strip()]
+        except (IOError, FileNotFoundError) as e:
+            logging.error(f"Error reading {SRC_KW_FILENAME}: {e}")
+    if not keywords:
+        logging.error("No keywords to search for. Please check your keywords file.")
+        return
+
+    logging.info("🏁 Starting the web crawler...")
 
     # Setup Chrome options
     chrome_options = Options()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
+    options_list = ['--headless', '--no-sandbox', '--disable-dev-shm-usage']
+    for opt in options_list:
+        chrome_options.add_argument(opt)
 
-    # Initialize WebDriver with the exact path to chromedriver
-    # Add your specific path to a filed called chromeDriverPath.py.
-    # The contents of chromeDriverPath.py should look similar to this:
-    # chromeDriverPath = '/Users/sueellenmisky/.wdm/drivers/chromedriver/mac64/127.0.6533.119/chromedriver-mac-x64/chromedriver'
-    # Ensure chromeDriverPath.py is in your .gitignore
+    # Initialize WebDriver using ChromeDriverManager
     service = Service(chromeDriverPath)
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
-    keywords_found_count = 0
+    # Get the number of match
+    kws_found_count = 0
     for careerPage in careerPages:
-        if crawl_careerPage(careerPage, driver):
-            keywords_found_count += 1
-        # Add a delay between requests
-        time.sleep(1)  
+        if crawl_careerPage(careerPage, driver, keywords):
+            kws_found_count += 1
+        time.sleep(1)
 
     driver.quit()
-    print(f"Keywords were found in job listings at {keywords_found_count} out of {len(careerPages)} career pages.")
-    print(f"💤 Web crawler has finished.")
+    logging.info(f"Keywords were found in job listings at {kws_found_count} out of {len(careerPages)} career pages.")
 
-def close_dialogs(driver):
+
+def close_dialogs(driver: webdriver.Chrome) -> None:
+    """
+    Tries to close any potential pop-up dialogs that may appear on the page.
+
+    Args:
+        driver (webdriver.Chrome): The Selenium WebDriver instance used for browsing.
+
+    Returns:
+        None
+    """
     try:
-        # If there's a dialog box with a close button with class .close-button or .close
-        # Add more class names as you encounter them
-        close_button = driver.find_element(By.CSS_SELECTOR, '.close-button' | '.close')
+        # Modify the CSS selector to find common close buttons, adjust as needed
+        close_button = WebDriverWait(driver, PAGE_LOADING_TIME_SLEEPER).until(
+            EC.element_to_be_clickable((By.CSS_SELECTOR, '.close-button, .close'))
+        )
         if close_button:
             close_button.click()
+            logging.info("Closed a dialog on the page.")
+    except TimeoutException:
+        logging.debug("No dialog found to close.")
     except Exception as e:
-        # No dialog to close or unable to find the close button
-        pass
+        logging.error(f"An unexpected error occurred: {e}")
 
-def crawl_careerPage(url, driver):
-    driver.get(url)
-    time.sleep(5)  # Wait for initial load
 
-    # Handle any potential dialogs
+def crawl_careerPage(url: str, driver: webdriver.Chrome, kws: List[str]) -> bool:
+    """
+    Crawls a given career page URL to search for keywords in the job listings.
+
+    Args:
+        url (str): URL of the career page to visit.
+        driver (webdriver.Chrome): Selenium WebDriver instance used for browsing.
+        kws (List[str]): the kws to look for on page at URL
+
+    Returns:
+        bool: True if any keywords were found on the page, False otherwise.
+    """
+    logging.info(f"Visiting career page: {url}")
+
+    driver.get(url)  # Selenium is loading url page
+
+    # Wait for the page to load completely using WebDriverWait before moving on
+    try:
+        WebDriverWait(driver, PAGE_LOADING_TIME_SLEEPER).until(
+            EC.presence_of_element_located((By.TAG_NAME, "body"))
+        )
+    except Exception as error:
+        logging.error(f"Error loading {url}: {error}")
+        return False
+
+    # Handle any potential dialogs after the page loads
     close_dialogs(driver)
 
-    try:
-        # Wait for page to fully load
-        WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "body")))
-    except Exception as error:
-        print(f"Error loading {url}: {error}")
-        return False
-
+    # Parse the page with BeautifulSoup
     soup = BeautifulSoup(driver.page_source, 'html.parser')
-    # Convert page text to lowercase to make search case-agnostic
     page_text = soup.get_text().lower()
-    found_keywords = set()
-    for keyword in keywords:
-        if keyword.lower() in page_text:
-            found_keywords.add(keyword)
+
+    # Search for keywords in the page text
+    found_keywords = {kw for kw in kws if kw.lower() in page_text}
+
     if found_keywords:
-        print(f'💃 Found keywords "{", ".join(found_keywords)}" in job listings at {url}')
-        return True
+        logging.info(f'💃 Found keywords {", ".join(found_keywords)} in job listings at {url}')
     else:
-        print(f'No keywords found in job listings at {url}')
-        return False
+        logging.info(f'No keywords found in job listings at {url}')
+
+    return bool(found_keywords)
 
 if __name__ == '__main__':
     main()
