@@ -29,7 +29,7 @@ def main():
     # Initialize WebDriver with the exact path to chromedriver
     # Add your specific path to a filed called chromeDriverPath.py.
     # The contents of chromeDriverPath.py should look similar to this:
-    # chromeDriverPath = '/Users/sueellenmisky/.wdm/drivers/chromedriver/mac64/127.0.6533.119/chromedriver-mac-x64/chromedriver'
+    # chromeDriverPath = '/Users/sueellenmisky/.wdm/drivers/chromedriver/mac64/129.0.6668.70/chromedriver-mac-x64/chromedriver'
     # Ensure chromeDriverPath.py is in your .gitignore
     service = Service(chromeDriverPath)
     driver = webdriver.Chrome(service=service, options=chrome_options)
@@ -42,7 +42,7 @@ def main():
         time.sleep(1)  
 
     driver.quit()
-    print(f"Keywords were found in job listings at {keywords_found_count} out of {len(careerPages)} career pages.")
+    print(f"📜 Keywords were found in {keywords_found_count} out of {len(careerPages)} career pages.")
     print(f"💤 Web crawler has finished.")
 
 def close_dialogs(driver):
@@ -78,10 +78,11 @@ def crawl_careerPage(url, driver):
         if keyword.lower() in page_text:
             found_keywords.add(keyword)
     if found_keywords:
-        print(f'💃 Found keywords "{", ".join(found_keywords)}" in job listings at {url}')
+        print(f'💃 Found keyword "{", ".join(found_keywords)}" at {url}')
         return True
     else:
-        print(f'No keywords found in job listings at {url}')
+        # If you want to see the pages that DON'T have keywords, enable the next line
+        # print(f'No keywords found at {url}')
         return False
 
 if __name__ == '__main__':

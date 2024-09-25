@@ -1,0 +1,9 @@
+Update the chromedriver
+
+From time to time you'll need to update the chromedriver.
+
+chromedriver mac-x64
+
+https://googlechromelabs.github.io/chrome-for-testing/#stable
+https://medium.com/@sethi.ashima/how-to-install-chromedriver-in-mac-7d8e2f980eb
+https://stackoverflow.com/questions/60362018/macos-catalinav-10-15-3-error-chromedriver-cannot-be-opened-because-the-de
