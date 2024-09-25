@@ -60,7 +60,7 @@ touch chromeDriverPath.py
 
 Below is a sample `chromeDriverPath.py`. Replace the path to your chromedriver with your own path.
 ```
-chromeDriverPath = '/Users/davidpuddy/.wdm/drivers/chromedriver/mac64/127.0.6533.119/chromedriver-mac-x64/chromedriver'
+chromeDriverPath = '/Users/davidpuddy/.wdm/drivers/chromedriver/mac64/129.0.6668.70/chromedriver-mac-x64/chromedriver'
 ```
 
 ### Edit keywords.txt
@@ -77,7 +77,7 @@ webdriver-manager downloads chromedriver to a specific directory. By default, it
 Navigate to the directory.
 Open your terminal and navigate to the directory containing the chromedriver executable (the file path below is an example only):
 ```
-cd /Users/newman/.wdm/drivers/chromedriver/mac64/127.0.6533.119/chromedriver-mac-x64/
+cd /Users/davidpuddy/.wdm/drivers/chromedriver/mac64/129.0.6668.70/chromedriver-mac-x64/
 ```
 
 Ensure the chromedriver file has executable permissions. You can set the correct permissions using the `chmod` command:
