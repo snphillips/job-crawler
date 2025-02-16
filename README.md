@@ -109,8 +109,17 @@ Remember to stop your chromedriver once you're done:
 
 ## Updating Your ChromeDriver
 
-As time goes by and you update your Chrome, you'll notice that the ChromeDriver version you're using only supports older versions of Chrome. This version mismatch causes Selenium to fail when trying to create a browser session. You may see a message that contains a message like this: `selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 129`.
+As time goes by and you update your Chrome, you'll notice that the ChromeDriver version you're using only supports older versions of Chrome. This version mismatch causes Selenium to fail when trying to create a browser session. 
+
+You may see a message that contains a message like this: `selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 129`.
 To resolve this issue, run the following command to install the latest ChromeDriver:
+
 ```
-brew upgrade chromedriver
+brew install chromedriver
+```
+
+or if you already have it installed:
+
+```
+brew update chromedriver
 ```
