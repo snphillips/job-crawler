@@ -60,7 +60,7 @@ touch chromeDriverPath.py
 
 Below is a sample `chromeDriverPath.py`. Replace the path to your chromedriver with your own path.
 ```
-chromeDriverPath = '/Users/davidpuddy/.wdm/drivers/chromedriver/mac64/129.0.6668.70/chromedriver-mac-x64/chromedriver'
+chromeDriverPath = '/Users/davidpuddy/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver'
 ```
 
 ### Edit keywords.txt
