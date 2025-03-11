@@ -77,7 +77,7 @@ webdriver-manager downloads chromedriver to a specific directory. By default, it
 Navigate to the directory.
 Open your terminal and navigate to the directory containing the chromedriver executable (the file path below is an example only):
 ```
-cd /Users/davidpuddy/.wdm/drivers/chromedriver/mac64/129.0.6668.70/chromedriver-mac-x64/
+cd /Users/davidpuddy/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/
 ```
 
 Ensure the chromedriver file has executable permissions. You can set the correct permissions using the `chmod` command:
@@ -90,7 +90,12 @@ Execute the chromedriver executable directly from the terminal:
 ./chromedriver
 ```
 
-Once the chromedriver is running, using the terminal, run the script:
+Once the chromedriver is running, using the terminal, cd into the project directory (edit below path to match your directory set up):
+```
+cd /Users/davidpuddy/Documents/01-software-dev/job-web-crawler
+```
+
+Run the script:
 
 ```
 python3 python-job-crawler.py

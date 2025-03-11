@@ -10,6 +10,10 @@ import time
 from careerPages import careerPages
 from chromeDriverPath import chromeDriverPath
 
+# Automatically install the right ChromeDriver version
+chrome_service = Service(chromeDriverPath)
+driver = webdriver.Chrome(service=chrome_service)
+
 # Store your keywords in a txt file where every word is on a new line
 FILENAME = "keywords.txt" 
 
@@ -29,9 +33,9 @@ def main():
     # Initialize WebDriver with the exact path to chromedriver
     # Add your specific path to a filed called chromeDriverPath.py.
     # The contents of chromeDriverPath.py should look similar to this:
-    # chromeDriverPath = '/Users/sueellenmisky/.wdm/drivers/chromedriver/mac64/129.0.6668.70/chromedriver-mac-x64/chromedriver'
+    # chromeDriverPath = '/Users/sueellenmisky/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver'
     # Ensure chromeDriverPath.py is in your .gitignore
-    service = Service(chromeDriverPath)
+    service = Service("/usr/local/bin/chromedriver")
     driver = webdriver.Chrome(service=service, options=chrome_options)
 
     keywords_found_count = 0
