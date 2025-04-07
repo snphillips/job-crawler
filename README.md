@@ -51,46 +51,13 @@ careerPages = [
 
 If you'd like to keep your list of career pages to yourself, confirm that the file has been added to your `.gitignore` to prevent it from being included in version control.
 
-### Create chromeDriverPath.py
-
-This script expects you to include the direct path to your chromedriver.
-```
-touch chromeDriverPath.py
-```
-
-Below is a sample `chromeDriverPath.py`. Replace the path to your chromedriver with your own path.
-```
-chromeDriverPath = '/Users/davidpuddy/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver'
-```
 
 ### Edit keywords.txt
 Edit `keywords.txt` with the keywords you'd like to search for. Write every keyword on a new line with no commas or any other separation indicator.
 
 ## Running the Script
 
-Get your `chromedriver` running.
-To run chromedriver directly from the command line, follow these steps:
-
-Locate chromedriver.
-webdriver-manager downloads chromedriver to a specific directory. By default, it's usually stored in your home directory under `.wdm`.
-
-Navigate to the directory.
-Open your terminal and navigate to the directory containing the chromedriver executable (the file path below is an example only):
-```
-cd /Users/davidpuddy/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/
-```
-
-Ensure the chromedriver file has executable permissions. You can set the correct permissions using the `chmod` command:
-```
-chmod +x chromedriver
-```
-
-Execute the chromedriver executable directly from the terminal:
-```
-./chromedriver
-```
-
-Once the chromedriver is running, using the terminal, run the script from the main project folder job-web-crawler:
+Run the script from the main project folder job-web-crawler:
 
 ```
 python3 python-job-crawler.py
@@ -100,26 +67,4 @@ The script will start and print messages indicating the progress, including whic
 If you need to interrupt your script, press `control + c`:
 ```
 ^c
-```
-
-Remember to stop your chromedriver once you're done:
-```
-^c
-```
-
-## Updating Your ChromeDriver
-
-As time goes by and you update your Chrome, you'll notice that the ChromeDriver version you're using only supports older versions of Chrome. This version mismatch causes Selenium to fail when trying to create a browser session. 
-
-You may see a message that contains a message like this: `selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 129`.
-To resolve this issue, run the following command to install the latest ChromeDriver:
-
-```
-brew install chromedriver
-```
-
-or if you already have it installed:
-
-```
-brew update chromedriver
 ```
