@@ -60,7 +60,7 @@ touch chromeDriverPath.py
 
 Below is a sample `chromeDriverPath.py`. Replace the path to your chromedriver with your own path.
 ```
-chromeDriverPath = '/Users/davidpuddy/.wdm/drivers/chromedriver/mac64/129.0.6668.70/chromedriver-mac-x64/chromedriver'
+chromeDriverPath = '/Users/davidpuddy/.wdm/drivers/chromedriver/mac64/133.0.6943.98/chromedriver-mac-x64/chromedriver'
 ```
 
 ### Edit keywords.txt
@@ -90,12 +90,7 @@ Execute the chromedriver executable directly from the terminal:
 ./chromedriver
 ```
 
-Once the chromedriver is running, using the terminal, cd into the project directory (edit below path to match your directory set up):
-```
-cd /Users/davidpuddy/Documents/01-software-dev/job-web-crawler
-```
-
-Run the script:
+Once the chromedriver is running, using the terminal, run the script from the main project folder job-web-crawler:
 
 ```
 python3 python-job-crawler.py
@@ -110,4 +105,21 @@ If you need to interrupt your script, press `control + c`:
 Remember to stop your chromedriver once you're done:
 ```
 ^c
+```
+
+## Updating Your ChromeDriver
+
+As time goes by and you update your Chrome, you'll notice that the ChromeDriver version you're using only supports older versions of Chrome. This version mismatch causes Selenium to fail when trying to create a browser session. 
+
+You may see a message that contains a message like this: `selenium.common.exceptions.SessionNotCreatedException: Message: session not created: This version of ChromeDriver only supports Chrome version 129`.
+To resolve this issue, run the following command to install the latest ChromeDriver:
+
+```
+brew install chromedriver
+```
+
+or if you already have it installed:
+
+```
+brew update chromedriver
 ```
