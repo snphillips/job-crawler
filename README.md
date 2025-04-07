@@ -68,7 +68,7 @@ Edit `keywords.txt` with the keywords you'd like to search for. Write every keyw
 
 ## Running the Script
 
-Ensure your `chromedriver` is running.
+Get your `chromedriver` running.
 To run chromedriver directly from the command line, follow these steps:
 
 Locate chromedriver.
