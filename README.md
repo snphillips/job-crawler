@@ -13,7 +13,6 @@ This web crawler was developed with ChatGPT, with prompts and guidance provided 
 ### Prerequisites
 - **Python3:** https://www.python.org/downloads/
 - **Google Chrome:** The crawler uses Chrome for rendering pages.
-- **ChromeDriver:** While [ChromeDriver](https://developer.chrome.com/docs/chromedriver/get-started) is normally required, this script uses `webdriver_manager` to handle installation automatically.
 
 ### Installation
 Clone the repo and navigate into the directory:
