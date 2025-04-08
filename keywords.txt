@@ -6,3 +6,4 @@
     reactjs
     UI Developer
     UI Engineer
+    data visualization
