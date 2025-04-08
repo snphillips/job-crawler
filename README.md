@@ -4,15 +4,16 @@ Looking for work stinks. Scouring websites for job postings is time-consuming an
 
 This web crawler was developed with ChatGPT, with prompts and guidance provided by me.
 
-note: This script is not perfect. Confirm that it works on your list of urls by first using keywords that _do_ appear on the sites you are searching.
-note: The below instructions are for macs.
+**Note:** 
+- Before using the crawler on your target websites, verify its functionality by first using a set of keywords that you know appear on the sites.
+- The below instructions are for macs.
 
 ## Getting Started
 
 ### Prerequisites
-- Python3: https://www.python.org/downloads/
-- Google Chrome
-- ChromeDriver: https://developer.chrome.com/docs/chromedriver/get-started
+- **Python3:** https://www.python.org/downloads/
+- **Google Chrome:** The crawler uses Chrome for rendering pages.
+- **ChromeDriver:** While [ChromeDriver](https://developer.chrome.com/docs/chromedriver/get-started) is normally required, this script uses `webdriver_manager` to handle installation automatically.
 
 ### Installation
 Clone the repo and navigate into the directory:
@@ -40,11 +41,12 @@ This file contain the list of websites you want to crawl.
 Below is a sample `careerPages.py`. Replace the placeholder urls with your own list.
 
 ```
+# This file contains the list of career pages to crawl.
 careerPages = [
     'https://great-company.com/careers',
     'https://we-value-work-life-balance.com/jobs',
     'https://not-making-the-world-a-worse-place.com/joinus',
-    'https:/bird-watching-and-forest-bathing.com/openings'
+    'https://bird-watching-and-forest-bathing.com/openings'
     # Add more websites as needed
 ]
 ```
